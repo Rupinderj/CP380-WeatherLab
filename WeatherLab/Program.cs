@@ -12,7 +12,7 @@ namespace WeatherLab
         {
             var measurements = new WeatherSqliteContext(dbfile).Weather;
 
-            var total_2020_precipitation = ?? TODO ??
+            var total_2020_precipitation = (from data in measurements where data.year == 2020 select data.precipitation).Sum(); 
             Console.WriteLine($"Total precipitation in 2020: {total_2020_precipitation} mm\n");
 
             //
