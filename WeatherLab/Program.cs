@@ -51,13 +51,40 @@ namespace WeatherLab
             //      $"{x:d4}"
             //
             Console.WriteLine("Year\tHDD\tCDD");
-
-            // ?? TODO ??
+            foreach (var meanYear in mean_temp)
+            {
+                Console.WriteLine($"{meanYear.key}\t{meanYear.hdd}\t{meanYear.cdd}");
+            };
+            
+            var variable = from temp in measurements
+                           orderby (temp.maxtemp-temp.mintemp) descending
+                select new
+                {
+                    date = $"{temp.year}-{temp.month:d2}-{temp.day:d2}",
+                    delta = (temp.maxtemp-temp.mintemp),
+                };
+            
 
             Console.WriteLine("\nTop 5 Most Variable Days");
             Console.WriteLine("YYYY-MM-DD\tDelta");
 
             // ?? TODO ??
+            int b = 0;
+        foreach(var k in variable)
+            {
+                if(b<5)
+                {
+                    Console.WriteLine($"{k.date}\t{k.delta}");
+                    b++;
+                }
+                else
+                {
+                    break;
+                }
+            }
         }
+        
     }
 }
+
+        
