@@ -21,6 +21,16 @@ namespace WeatherLab
             //
 
             // ?? TODO ??
+            var mean_temp = from meanYear in measurements.AsEnumerable()
+                            group meanYear by meanYear.year into resGroup
+                            orderby resGroup.Key
+                            select new
+                            {
+                                key = resGroup.Key,
+                                hdd = resGroup.Where(r => r.meantemp < 18).Count(),
+                                cdd = resGroup.Where(r => r.meantemp >= 18).Count(),
+                            };
+            
 
             //
             // Cooling degree days have a mean temp of >=18C
